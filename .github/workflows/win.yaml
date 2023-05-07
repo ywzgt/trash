@@ -26,7 +26,10 @@ jobs:
           which timeout
           echo
           timeout --help
-          
+          echo
+          which pacman
+          pacman --version
+          pacman -Sy
           false || true
           /bin/timeout 5 sleep 6 || true
         shell: C:\msys64\usr\bin\bash.exe -e {0}
