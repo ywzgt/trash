@@ -22,4 +22,7 @@ jobs:
           which git
           which split
           which df
+          which timeout
+          false || true
+          timeout 5 sleep 6 || true
         shell: C:\msys64\usr\bin\bash.exe -e {0}
