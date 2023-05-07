@@ -14,8 +14,7 @@ jobs:
           echo $PATH
           echo
           df -Tha
-          winver
-          echo ' '
+          echo
           env
           python3 --version
           which python
