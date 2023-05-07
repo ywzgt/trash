@@ -32,7 +32,7 @@ run() {
 	echo
 }
 
-case $(lsb_release -a) in *ubuntu*)
+case $(lsb_release --id) in Ubuntu)
 	remove /usr/share/swift
 	remove /usr/share/miniconda
 	remove /usr/share/dotnet
