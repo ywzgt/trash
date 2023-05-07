@@ -1,0 +1,17 @@
+name: run
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Run Script
+        run: |
+          msys2bash.cmd
+          df -Th
+          du -sh /*
+          echo $PATH
+          winver
