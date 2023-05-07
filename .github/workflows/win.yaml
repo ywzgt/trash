@@ -10,6 +10,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Script
         run: |
+          export PATH=/c/msys64/usr/bin:$PATH
           df -Th
           echo $PATH
           echo
@@ -24,7 +25,7 @@ jobs:
           which df
           which timeout
           echo
-          /bin/timeout --help
+          timeout --help
           
           false || true
           /bin/timeout 5 sleep 6 || true
