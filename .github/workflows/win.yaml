@@ -10,7 +10,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Script
         run: |
-          C:\msys64\usr\bin\bash.exe
           df -Th
           du -sh /*
           echo $PATH
@@ -18,3 +17,4 @@ jobs:
           winver
           echo ' '
           env
+        shell: C:\msys64\usr\bin\bash.exe
