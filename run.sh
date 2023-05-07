@@ -9,13 +9,6 @@ remove() {
 }
 
 
-remove /usr/share/swift
-remove /usr/share/miniconda
-remove /usr/share/dotnet
-remove /usr/local
-remove /opt/hostedtoolcache
-
-
 echo
 df -Th
 echo
@@ -23,17 +16,30 @@ sudo apt update &>/dev/null
 sudo apt install smartmontools -y
 echo
 echo
-sudo smartctl -a `findmnt /|awk '/dev/{print$2}'`
+sudo smartctl -a `findmnt /|awk '/dev/{print$2}'` -T permissive || true
 echo
 echo
-sudo smartctl -a `findmnt /mnt|awk '/dev/{print$2}'`
+sudo smartctl -a `findmnt /mnt|awk '/dev/{print$2}'` -T permissive || true
 echo
 ls -l `findmnt /|awk '/dev/{print$2}'`
 ls -l `findmnt /mnt|awk '/dev/{print$2}'`
 echo
 
-git config --global user.name 'github-actions'
-git config --global user.email 'noreply@github.com'
-git add .
-git commit -m "Action $(date -u)"
-git push origin main
+
+run() {
+	echo "::Run '$@':"
+	$@
+	echo
+}
+
+case $(lsb_release -a) in *ubuntu*)
+	remove /usr/share/swift
+	remove /usr/share/miniconda
+	remove /usr/share/dotnet
+	remove /usr/local
+	remove /opt/hostedtoolcache
+	run df -Th
+	run lsb_release -a
+;;
+esac
+lsb_release --id
