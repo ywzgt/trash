@@ -23,6 +23,9 @@ jobs:
           which split
           which df
           which timeout
+          echo
+          /bin/timeout --help
+          
           false || true
-          timeout 5 sleep 6 || true
+          /bin/timeout 5 sleep 6 || true
         shell: C:\msys64\usr\bin\bash.exe -e {0}
