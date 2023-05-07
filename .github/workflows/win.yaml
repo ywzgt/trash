@@ -14,7 +14,6 @@ jobs:
           echo $PATH
           echo
           df -Tha
-          pacman --version || true
           winver
           echo ' '
           env
@@ -24,5 +23,4 @@ jobs:
           which git
           which split
           which df
-          pacman -Sy
         shell: C:\msys64\usr\bin\bash.exe -e {0}
