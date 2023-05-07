@@ -12,9 +12,17 @@ jobs:
         run: |
           df -Th
           echo $PATH
-          pacman --version
+          echo
+          df -Tha
+          pacman --version || true
           winver
           echo ' '
           env
+          python3 --version
+          which python
+          which python3
+          which git
+          which split
+          which df
           pacman -Sy
         shell: C:\msys64\usr\bin\bash.exe -e {0}
