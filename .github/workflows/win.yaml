@@ -11,16 +11,6 @@ jobs:
       - name: Run Script
         run: |
           set PATH=C:\msys64\usr\bin;%PATH%
-          timeout --help
-          which timeout
-          which tar
-          which xz
-          which split
-          git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
-          echo .
-          echo .
-          set path=%~dp0depot_tools;%PATH%
-          set DEPOT_TOOLS_UPDATE=0
-          depot_tools\gclient.bat --help
-          rem pip install 
+          pip install httplib2 six
+          python3 py
         shell: cmd
