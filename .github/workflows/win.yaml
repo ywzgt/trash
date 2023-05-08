@@ -19,4 +19,6 @@ jobs:
           echo .
           mv py depot_tools
           python3 depot_tools\py
+          python3 depot_tools\gclient.bat --help
+          python3 depot_tools\gclient.bat sync --no-history -nohooks --verbose
         shell: cmd
