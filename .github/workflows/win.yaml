@@ -31,5 +31,33 @@ jobs:
           pacman --version
           pacman -Sy
           false || true
+          wget -V
+          curl -V
+          which curl
+          rm --help
+          ls -la
+          which ls
+          which tar
+          which cat
+          cat --version
+          tar --version
+          xz --version
+          which find
+          find --version
+          which cp
+          cp --version
+          which file
+          file --version
+          which mv
+          mv --version
+          which install
+          install --version
+          which mkdir
+          which sha256sum
+          which sha512sum
+          which b2sum
+          unzip --help
           /bin/timeout 5 sleep 6 || true
+          exit 1233
+          false
         shell: C:\msys64\usr\bin\bash.exe -e {0}
