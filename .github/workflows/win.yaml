@@ -11,8 +11,12 @@ jobs:
       - name: Run Script
         run: |
           set PATH=C:\msys64\usr\bin;%PATH%
-          pip install httplib2 six auth
+          set DEPOT_TOOLS_UPDATE=0
+          set VPYTHON_BYPASS="manually managed python not supported by chrome operations"
+          pip install httplib2 six auth >nul
+          git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
           echo .
           echo .
-          python3 py
+          mv py depot_tools
+          python3 depot_tools\py
         shell: cmd
