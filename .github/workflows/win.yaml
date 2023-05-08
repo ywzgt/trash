@@ -22,7 +22,6 @@ jobs:
           set path=%~dp0depot_tools;%PATH%
           set DEPOT_TOOLS_UPDATE=0
           echo %path%
-          gclient --help
-          python3 -m pip --version
-          pip --version
+          gclient.bat --help
+          rem pip install 
         shell: cmd
