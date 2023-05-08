@@ -26,5 +26,6 @@ jobs:
           cd $src
           echo `pwd -P`
           which ninja
-          which gn
+          ninja --version
+          which gclient
         shell: C:\msys64\usr\bin\bash.exe -e {0}
