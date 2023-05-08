@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Script
         run: |
-          set PATH=C:\msys64\usr\bin;%PATH%
+          rem set PATH=C:\msys64\usr\bin;%PATH%
           set DEPOT_TOOLS_UPDATE=0
           set VPYTHON_BYPASS="manually managed python not supported by chrome operations"
           pip install httplib2 six auth >nul
@@ -18,7 +18,14 @@ jobs:
           echo .
           echo .
           mv py depot_tools
-          python3 depot_tools\py
-          python3 depot_tools\gclient.bat --help
-          python3 depot_tools\gclient.bat sync --no-history -nohooks --verbose
+          rem python3 depot_tools\py
+          rem python3 depot_tools\gclient.bat --help
+          rem python3 depot_tools\gclient.bat sync --no-history -nohooks --verbose
+
+          "C:\msys64\usr\bin\wget.exe" -c "https://chromium.googlesource.com/chromium/src/+archive/refs/tags/113.0.5672.116.tar.gz"
+          md src
+          tar xvf 113.0.5672.116.tar.gz -C src
+          dir
+          echo .
+          dir src
         shell: cmd
