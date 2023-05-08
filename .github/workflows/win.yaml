@@ -15,17 +15,8 @@ jobs:
           printf 'Processor: '; cat /proc/cpuinfo|grep processor|wc -l
           cat /proc/cpuinfo|grep 'model name'|head -1
           cat /proc/meminfo | head; uname -a
-          echo ; df -hTa; echo ' '; pwd | head
+          echo ; df -hTa
           echo
-          echo $PWD
-          cd $HOME
-          pwd
-          echo $HOME
-          src=/c/workdir/src
-          mkdir -pv $src
-          cd $src
-          echo `pwd -P`
-          which ninja
-          ninja --version
-          which gclient
+          find . -exec touch -cd @0 {} +
+          ls -la
         shell: C:\msys64\usr\bin\bash.exe -e {0}
