@@ -20,14 +20,14 @@ jobs:
           echo
           ls -la
           echo
+          ver="113.0.5672.116"
           SRCDEST="/c/chromium_sources_$ver"
           mkdir -vp "${SRCDEST}"
-          ver="113.0.5672.116"
           git config --global advice.detachedHead false
 
           pushd ${SRCDEST} >/dev/null 2>&1
           echo '::Cloning depot_tools...'
-          cmd /c git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
+          cmd /c "git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git"
           echo 'done.'
           ls -la
 
