@@ -54,6 +54,5 @@ jobs:
           which sha256sum
           which sha512sum
           which b2sum
-          exit 1233 || true
-          false || true
+          which exit
         shell: C:\msys64\usr\bin\bash.exe -e {0}
