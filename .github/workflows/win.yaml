@@ -25,5 +25,6 @@ jobs:
           mkdir -pv $src
           cd $src
           echo `pwd -P`
-          ln --help
+          which ninja
+          which gn
         shell: C:\msys64\usr\bin\bash.exe -e {0}
