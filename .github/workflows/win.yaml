@@ -15,20 +15,28 @@ jobs:
           printf 'Processor: '; cat /proc/cpuinfo|grep processor|wc -l
           cat /proc/cpuinfo|grep 'model name'|head -1
           cat /proc/meminfo | head; uname -a
-          echo ; df -hTa
           echo
-          which bsdtar || pacman -Fy bsdtar
-          find . -exec touch -cd @0 {} +
+          df -hTa
+          echo
           ls -la
           echo
           SRCDEST="/c/chromium_sources_$ver"
+          mkdir -vp "${SRCDEST}"
 
-          	mkdir -vp "${SRCDEST}"/src
-            ln -srv "${SRCDEST}/src" .
+          ver="113.0.5672.116"
+          git config --global advice.detachedHead false
 
-            	pushd ${SRCDEST} >/dev/null 2>&1
-              pwd
-              popd >/dev/null 2>&1
 
-              pacman -Fy free
+          pushd ${SRCDEST} >/dev/null 2>&1
+
+          echo '::Cloning depot_tools...'
+          cmd /c git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
+          echo 'done.'
+
+          ls -la
+
+          popd >/dev/null 2>&1
+
+          ls -la ${SRCDEST}/{depot_tools,}
+	
         shell: C:\msys64\usr\bin\bash.exe -e {0}
