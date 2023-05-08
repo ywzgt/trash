@@ -17,6 +17,7 @@ jobs:
           cat /proc/meminfo | head; uname -a
           echo ; df -hTa
           echo
+          which bsdtar || pacman -Fy bsdtar
           find . -exec touch -cd @0 {} +
           ls -la
         shell: C:\msys64\usr\bin\bash.exe -e {0}
