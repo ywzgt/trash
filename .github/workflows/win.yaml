@@ -15,5 +15,8 @@ jobs:
           printf 'Processor: '; cat /proc/cpuinfo|grep processor|wc -l
           cat /proc/cpuinfo|grep 'model name'|head -1
           cat /proc/meminfo | head; uname -a
-          echo ' '; df -hT; echo ' '; dmesg -T | head; echo ' '; swapon -v; echo ' '
+          echo ; df -hTa; echo ' '; pwd | head
+          echo
+          echo $PWD
+          echo `pwd -P`
         shell: C:\msys64\usr\bin\bash.exe -e {0}
