@@ -19,10 +19,11 @@ jobs:
           echo
           echo $PWD
           cd $HOME
+          pwd
           echo $HOME
           src=/c/workdir/src
           mkdir -pv $src
           cd $src
           echo `pwd -P`
-          echo ~
+          ln --help
         shell: C:\msys64\usr\bin\bash.exe -e {0}
