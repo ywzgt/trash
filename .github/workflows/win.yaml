@@ -20,7 +20,6 @@ jobs:
           which bsdtar || pacman -Fy bsdtar
           find . -exec touch -cd @0 {} +
           ls -la
-          free -h
           echo
           SRCDEST="/c/chromium_sources_$ver"
 
@@ -30,4 +29,6 @@ jobs:
             	pushd ${SRCDEST} >/dev/null 2>&1
               pwd
               popd >/dev/null 2>&1
+
+              pacman -Fy free
         shell: C:\msys64\usr\bin\bash.exe -e {0}
