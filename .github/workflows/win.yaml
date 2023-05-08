@@ -11,49 +11,9 @@ jobs:
       - name: Run Script
         run: |
           export PATH=/c/msys64/usr/bin:$PATH
-          df -Th
-          echo $PATH
-          echo
           df -Tha
-          echo
-          env
-          python3 --version
-          which python
-          which python3
-          which git
-          which split
-          which df
-          which timeout
-          echo
-          timeout --help
-          echo
-          which pacman
-          pacman --version
-          wget -V
-          curl -V
-          which curl
-          rm --help
-          ls -la
-          which ls
-          which tar
-          which cat
-          cat --version
-          tar --version
-          xz --version
-          which find
-          find --version
-          which cp
-          cp --version
-          which file
-          file --version
-          which mv
-          mv --version
-          which install
-          install --version
-          which mkdir
-          which sha256sum
-          which sha512sum
-          which b2sum
-          false || true
-          pacman --version
+          printf 'Processor: '; cat /proc/cpuinfo|grep processor|wc -l
+          cat /proc/cpuinfo|grep 'model name'|head -1
+          cat /proc/meminfo | head; uname -a
+          echo ' '; df -hT; echo ' '; dmesg -T | head; echo ' '; swapon -v; echo ' '
         shell: C:\msys64\usr\bin\bash.exe -e {0}
