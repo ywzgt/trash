@@ -54,8 +54,6 @@ jobs:
           which sha256sum
           which sha512sum
           which b2sum
-          unzip --help
-          /bin/timeout 5 sleep 6 || true
           exit 1233 || true
           false || true
         shell: C:\msys64\usr\bin\bash.exe -e {0}
