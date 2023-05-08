@@ -17,8 +17,9 @@ jobs:
           which xz
           which split
           git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
-          dir
-          set path=~%dp0/depot_tools;%PATH%
+          echo .
+          echo .
+          set path=%~dp0/depot_tools;%PATH%
           set DEPOT_TOOLS_UPDATE=0
           gclient --help
           python3 -m pip --version
