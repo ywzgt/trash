@@ -29,8 +29,6 @@ jobs:
           echo
           which pacman
           pacman --version
-          pacman -Sy
-          false || true
           wget -V
           curl -V
           which curl
@@ -58,6 +56,6 @@ jobs:
           which b2sum
           unzip --help
           /bin/timeout 5 sleep 6 || true
-          exit 1233
+          exit 1233 || true
           false
         shell: C:\msys64\usr\bin\bash.exe -e {0}
