@@ -19,7 +19,7 @@ jobs:
           git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
           echo .
           echo .
-          set path=%~dp0/depot_tools;%PATH%
+          set path=%~dp0depot_tools;%PATH%
           set DEPOT_TOOLS_UPDATE=0
           echo %path%
           gclient.py --help
