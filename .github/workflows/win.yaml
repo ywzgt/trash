@@ -18,5 +18,11 @@ jobs:
           echo ; df -hTa; echo ' '; pwd | head
           echo
           echo $PWD
+          cd $HOME
+          echo $HOME
+          src=/c/workdir/src
+          mkdir -pv $src
+          cd $src
           echo `pwd -P`
+          echo ~
         shell: C:\msys64\usr\bin\bash.exe -e {0}
