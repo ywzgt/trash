@@ -16,6 +16,11 @@ jobs:
           which tar
           which xz
           which split
-          git clone --depth=1 -b 113.0.5672.116 https://chromium.googlesource.com/chromium/src
+          git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
           dir
+          set path=~%dp0/depot_tools;%PATH%
+          set DEPOT_TOOLS_UPDATE=0
+          gclient --help
+          python3 -m pip --version
+          pip --version
         shell: cmd
