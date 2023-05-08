@@ -54,6 +54,6 @@ jobs:
           which sha256sum
           which sha512sum
           which b2sum
-          exit 123
+          false || true
           pacman --version
         shell: C:\msys64\usr\bin\bash.exe -e {0}
