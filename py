@@ -56,7 +56,7 @@ else:
   import queue
   import urllib.parse as urlparse
 
- import collections
+import collections
 import contextlib
 import errno
 import json
