@@ -22,7 +22,7 @@ jobs:
           rem python3 depot_tools\gclient.bat --help
           rem python3 depot_tools\gclient.bat sync --no-history -nohooks --verbose
 
-          "C:\msys64\usr\bin\wget.exe" -c "https://chromium.googlesource.com/chromium/src/+archive/refs/tags/113.0.5672.116.tar.gz"
+          curl -#O "https://chromium.googlesource.com/chromium/src/+archive/refs/tags/113.0.5672.116.tar.gz"
           md src
           tar xvf 113.0.5672.116.tar.gz -C src
           dir
