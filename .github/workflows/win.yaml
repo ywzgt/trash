@@ -12,9 +12,11 @@ jobs:
         run: |
           rem set PATH=C:\msys64\usr\bin;%PATH%
           rem which 7z
-          curl -LO https://commondatastorage.googleapis.com/chromium-browser-official/chromium-113.0.5672.93.tar.xz
-          7z x chromium-113.0.5672.93.tar.xz -oC:\
-          cd /d c:
-          7z x chromium-113.0.5672.93.tar -oout
-          dir out
+          rem curl -LO https://commondatastorage.googleapis.com/chromium-browser-official/chromium-113.0.5672.93.tar.xz
+          rem 7z x chromium-113.0.5672.93.tar.xz -oC:\
+          rem cd /d c:
+          rem 7z x chromium-113.0.5672.93.tar -oout
+          md c:\chrome\chromium-113.0.5672.93
+          ren c:\chrome\chromium-113.0.5672.93 src
+          dir c:\chrome
         shell: cmd
