@@ -10,7 +10,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Script
         run: |
-          rem set PATH=C:\msys64\usr\bin;%PATH%
-          7z
-          7za
+          set PATH=C:\msys64\usr\bin;%PATH%
+          which 7z
         shell: cmd
