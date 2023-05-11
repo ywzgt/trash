@@ -21,7 +21,7 @@ jobs:
           rem dir c:\chrome
           wmic pagefile list /format:list
           echo .
-          wmic pagefileset where name=“D:\pagefile.sys” set InitialSize=1024,MaximumSize=4096
+          wmic pagefileset where name="D:\pagefile.sys" set InitialSize=1024,MaximumSize=4096
           echo .
           wmic pagefile list /format:list
         shell: cmd
