@@ -1,0 +1,4 @@
+#!/bin/bash
+
+du -sh /usr/local/*
+du -sh /usr/share/miniconda  /usr/share/dotnet /usr/share/swift
