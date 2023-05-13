@@ -1,9 +1,9 @@
-name: run
+name: linux
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  runsh:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
