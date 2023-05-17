@@ -16,5 +16,8 @@ sudo cp /tmp/sources.list /etc/apt/sources.list -v
 
 sudo apt update
 sudo apt install -y libstdc++6
-
+echo
+apt download libstdc++6
+sleep 3600
+echo
 ./install-build-deps --no-syms --android --no-chromeos-fonts
