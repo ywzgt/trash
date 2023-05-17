@@ -1,24 +1,7 @@
 #!/bin/bash
 
-dpkg -l | grep 13.1
-echo
 curl -s "https://chromium.googlesource.com/chromium/src/+/050417b30319b9a97a78d6aa29c2fc3e7805d65a/build/install-build-deps.sh?format=TEXT" | base64 -d >install-build-deps
 chmod +x install-build-deps
 
-cat <<EOF>/tmp/sources.list
-deb http://azure.archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
-deb http://azure.archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb http://azure.archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
-deb http://azure.archive.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
-EOF
-
-sudo cp /tmp/sources.list /etc/apt/sources.list -v
-
-sudo apt update
-sudo apt install -y libstdc++6
-echo
-apt download libstdc++6
-
-ls -la /etc/apt/sources*
-echo
+	[ ! -d "/etc/apt/sources.list.d" ] || rm -rf /etc/apt/sources.list.d
 ./install-build-deps --no-syms --android --no-chromeos-fonts
