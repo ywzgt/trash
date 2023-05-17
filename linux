@@ -1,5 +1,7 @@
 #!/bin/bash
 
+dpkg -l | grep libc
+dpkg -l | grep libstdc++
 curl -s "https://chromium.googlesource.com/chromium/src/+/050417b30319b9a97a78d6aa29c2fc3e7805d65a/build/install-build-deps.sh?format=TEXT" | base64 -d >install-build-deps
 chmod +x install-build-deps
 ./install-build-deps --no-syms --android --no-chromeos-fonts
