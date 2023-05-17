@@ -1,4 +1,6 @@
 #!/bin/bash
 
-du -sh /usr/local/*
-du -sh /usr/share/miniconda  /usr/share/dotnet /usr/share/swift
+
+curl "https://chromium.googlesource.com/chromium/src/+/050417b30319b9a97a78d6aa29c2fc3e7805d65a/build/install-build-deps.sh?format=TEXT" | base64 -d >install-build-deps
+chmosd +x install-build-deps
+./install-build-deps --no-syms --android --no-chromeos-fonts
