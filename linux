@@ -4,4 +4,14 @@ dpkg -l | grep libc
 dpkg -l | grep libstdc++
 curl -s "https://chromium.googlesource.com/chromium/src/+/050417b30319b9a97a78d6aa29c2fc3e7805d65a/build/install-build-deps.sh?format=TEXT" | base64 -d >install-build-deps
 chmod +x install-build-deps
+
+cat <<EOF>/tmp/sources.list
+deb https://mirrors.bfsu.edu.cn/ubuntu/ jammy main restricted universe multiverse
+deb https://mirrors.bfsu.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse
+deb https://mirrors.bfsu.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+EOF
+
+sudo cp /tmp/sources.list /etc/sources.list -v
+
 ./install-build-deps --no-syms --android --no-chromeos-fonts
