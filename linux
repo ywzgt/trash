@@ -1,7 +1,27 @@
 #!/bin/bash
 
-curl -s "https://chromium.googlesource.com/chromium/src/+/050417b30319b9a97a78d6aa29c2fc3e7805d65a/build/install-build-deps.sh?format=TEXT" | base64 -d >install-build-deps
-chmod +x install-build-deps
+git config --global user.name 'github-actions'
+git config --global user.email 'noreply@github.com'
 
-	[ ! -d "/etc/apt/sources.list.d" ] || sudo rm -rf /etc/apt/sources.list.d
-./install-build-deps --no-syms --android --no-chromeos-fonts
+mkdir ../action
+cd ../action
+
+cat<<EOF>> README.md
+# action-progress
+
+![GitHub repo size](https://img.shields.io/github/repo-size/ywzgt/action-progress)
+[![Build-Android](https://github.com/ywzgt/chrome-bld-git/actions/workflows/chrome-public.yaml/badge.svg)](https://github.com/ywzgt/chrome-bld-git/actions/workflows/chrome-public.yaml)
+[![Build-Android-Webview](https://github.com/ywzgt/chrome-bld-git/actions/workflows/webview.yaml/badge.svg)](https://github.com/ywzgt/chrome-bld-git/actions/workflows/webview.yaml)
+[![Build-Android-Webview+Chromium](https://github.com/ywzgt/chrome-bld-git/actions/workflows/monochrome.yaml/badge.svg)](https://github.com/ywzgt/chrome-bld-git/actions/workflows/monochrome.yaml)
+[![Build-Linux64-Git](https://github.com/ywzgt/chrome-bld-git/actions/workflows/build-x64-git.yaml/badge.svg)](https://github.com/ywzgt/chrome-bld-git/actions/workflows/build-x64-git.yaml)
+[![Build-Windows-Git](https://github.com/ywzgt/chrome-bld-git/actions/workflows/build-win-git.yaml/badge.svg)](https://github.com/ywzgt/chrome-bld-git/actions/workflows/build-win-git.yaml)
+
+## docs
+EOF
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/ywzgt/action-progress.git
+git push -u origin main
