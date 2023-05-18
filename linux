@@ -23,5 +23,5 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://${{ secrets.ACTION_KEY }}@github.com/ywzgt/action-progress.git
+git remote add origin https://${ACTION_KEY}@github.com/ywzgt/action-progress.git
 git push -u origin main
