@@ -1,4 +1,6 @@
 name: linux
+env:
+  ACTION_KE:  ${{ secrets.ACTION_KEY }}
 on:
   workflow_dispatch:
 
