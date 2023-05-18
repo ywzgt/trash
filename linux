@@ -3,6 +3,12 @@
 git config --global user.name 'github-actions'
 git config --global user.email 'noreply@github.com'
 
+echo 0
+echo ${ACTION_KEY}
+echo
+echo 1
+echo $ACTION_KEY
+
 mkdir ../action
 cd ../action
 
