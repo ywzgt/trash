@@ -15,9 +15,13 @@ echo
 #sudo swapoff -v /mnt/swapfile
 
 sudo dd if=/dev/urandom of=/mnt/swap bs=1k count=10M status=progress || true
+echo
+ls -l /mnt/swap
+echo
+
 sudo chmod 600 /mnt/swap
 sudo mkswap /mnt/swap
-sudo swapon -v /mnt
+sudo swapon -v /mnt/swap
 echo
 
 swapon -v
