@@ -16,7 +16,7 @@ sudo swapoff -v /mnt/swapfile
 
 sudo umount -v /mnt
 echo
-findmnt $DEV -D
+cat /proc/self/mount*|grep $DEV
 echo
 
 sudo mkswap "$DEV"
