@@ -14,14 +14,18 @@ echo
 DEV="$(findmnt /mnt|awk '{print$2}'|grep '/dev/')"
 sudo swapoff -v /mnt/swapfile
 
-#sudo umount -v /mnt
-#sudo mkswap "$DEV"
-#sudo mount -v "$DEV" /mnt
+sudo umount -v /mnt
+echo
+findmnt $DEV -D
+echo
+
+sudo mkswap "$DEV"
+sudo mount -v "$DEV" /mnt
 
 echo
 swapon -v
 
-sudo mkswap /mnt
+#sudo mkswap /mnt
 
 #sudo dd if=/dev/urandom of=/mnt/swap bs=1000 count=10M status=progress
 #sudo chmod 600 /mnt/swap
