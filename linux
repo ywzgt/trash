@@ -11,10 +11,17 @@ echo $ACTION_KEY
 
 df -h
 echo
-sudo dd if=/dev/urandom of=/mnt/swap bs=1000 count=10M status=progress
-sudo chmod 600 /mnt/swap
-sudo mkswap /mnt/swap
-sudo swapon -v /mnt/swap
+DEV="$(findmnt /mnt|awk '{print$2}'|grep '/dev/')"
+sudo swapoff -v /mnt/swapfile
+sudo umount -v /mnt
+sudo mkswap "$DEV"
+sudo mount -v "$DEV" /mnt
+
+#sudo dd if=/dev/urandom of=/mnt/swap bs=1000 count=10M status=progress
+#sudo chmod 600 /mnt/swap
+#sudo mkswap /mnt/swap
+
+sudo swapon -v /mnt
 echo
 swapon -v
 echo
