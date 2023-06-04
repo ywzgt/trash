@@ -14,7 +14,7 @@ echo
 #DEV="$(findmnt /mnt|awk '{print$2}'|grep '/dev/')"
 #sudo swapoff -v /mnt/swapfile
 
-sudo dd if=/dev/urandom of=/mnt/swap bs=1k count=10M status=progress || true
+sudo dd if=/dev/zero of=/mnt/swap bs=1k count=10M status=noxfer || true
 echo
 ls -l /mnt/swap
 echo
