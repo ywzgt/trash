@@ -38,7 +38,6 @@ https://ftp.gnu.org/gnu/findutils/findutils-4.9.0.tar.xz
 https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz
 https://pypi.org/packages/source/f/flit-core/flit_core-3.9.0.tar.gz
 https://ftp.gnu.org/gnu/gawk/gawk-5.2.2.tar.xz
-https://ftp.gnu.org/gnu/gcc/gcc-13.1.0/gcc-13.1.0.tar.xz
 https://ftp.gnu.org/gnu/gdbm/gdbm-1.23.tar.gz
 https://ftp.gnu.org/gnu/gettext/gettext-0.21.1.tar.xz
 https://ftp.gnu.org/gnu/glibc/glibc-2.37.tar.xz
@@ -60,7 +59,6 @@ https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.69.t
 https://github.com/libffi/libffi/releases/download/v3.4.4/libffi-3.4.4.tar.gz
 https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.7.tar.gz
 https://ftp.gnu.org/gnu/libtool/libtool-2.4.7.tar.xz
-https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.3.5.tar.xz
 https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz
 https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz
 https://download.savannah.gnu.org/releases/man-db/man-db-2.11.2.tar.xz
