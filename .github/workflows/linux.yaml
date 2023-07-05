@@ -11,11 +11,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Checkout Repository
+      - name: 32bit
         run: |
           uname -m
           uname -a
         shell: linux32 bash {0}
+
+      - name: t1
+        run: |
+          echo "TAG_DES=Multilib LFS on x86_64 with i686 libraries, systemd" >> $GITHUB_ENV
+          echo $GITHUB_ENV
+
+      - name: t2
+        run: |
+          echo $TAG_DES
+          echo -e '\n'
+          echo $GITHUB_ENV
+          exit 123
 
       - name: Run Script
         run: bash -e linux
