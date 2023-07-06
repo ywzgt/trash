@@ -19,11 +19,13 @@ jobs:
 
       - name: test key
         run: |
-          echo "key:: ${{ secrets.ACTION_SIGN_KEY }}"
           echo "${{ secrets.ACTION_SIGN_KEY }}" >sign.asc
           gpg --import sign.asc
           touch 1.asc 2.asc
           gpg -vbu 732DEE432385F258 *.asc
+          echo ''
+          echo 'verify sig...'
+          gpg -v --verify *.sig
 
       - name: t1
         run: |
