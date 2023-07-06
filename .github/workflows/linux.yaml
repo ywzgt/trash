@@ -17,6 +17,14 @@ jobs:
           uname -a
         shell: linux32 bash {0}
 
+      - name: test key
+        run: |
+          echo "key:: ${{ secrets.ACTION_SIGN_KEY }}"
+          echo "${{ secrets.ACTION_SIGN_KEY }}" >sign.asc
+          gpg --import sign.asc
+          touch 1.asc 2.asc
+          gpg -vbu 732DEE432385F258 *.asc
+
       - name: t1
         run: |
           echo "TAG_DES=Multilib LFS on x86_64 with i686 libraries, systemd" >> $GITHUB_ENV
