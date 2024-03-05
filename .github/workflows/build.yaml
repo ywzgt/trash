@@ -1,0 +1,12 @@
+name: run
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04 #https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Run Script
+        run: bash -e run.sh

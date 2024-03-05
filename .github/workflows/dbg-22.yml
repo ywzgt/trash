@@ -1,0 +1,20 @@
+name: Debugging with SSH 22.04
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Start SSH via Ngrok
+      if: ${{ always() }}
+      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/8210020cdb17776e9bbfa9048a0d9609/raw | bash
+      env:
+        NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+        USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
+    - name: System info
+      run: |
+        uname -a; echo " "
+        head /proc/meminfo; echo " "
+        lscpu
+    - name: Don't kill instace
+      run: while true; do date; df -Th; free -h; echo " "; sleep 500; head /dev/urandom > "$(cat /proc/sys/kernel/random/uuid)"; done

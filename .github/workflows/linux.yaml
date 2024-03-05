@@ -1,0 +1,43 @@
+name: linux
+env:
+  ACTION_KEY:  ${{ secrets.ACTION_KEY }}
+on:
+  workflow_dispatch:
+
+jobs:
+  runsh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 32bit
+        run: |
+          uname -m
+          uname -a
+        shell: linux32 bash {0}
+
+      - name: test key
+        run: |
+          echo "${{ secrets.ACTION_SIGN_KEY }}" >sign.asc
+          gpg --import sign.asc
+          touch 1.asc 2.asc
+          gpg -vbu 732DEE432385F258 *.asc
+          echo ''
+          echo 'verify sig...'
+          gpg -v --verify *.sig
+
+      - name: t1
+        run: |
+          echo "TAG_DES=Multilib LFS on x86_64 with i686 libraries, systemd" >> $GITHUB_ENV
+          echo $GITHUB_ENV
+
+      - name: t2
+        run: |
+          echo $TAG_DES
+          echo -e '\n'
+          echo $GITHUB_ENV
+          exit 123
+
+      - name: Run Script
+        run: bash -e linux

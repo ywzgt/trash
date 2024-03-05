@@ -1,0 +1,79 @@
+printf 'Processor: '; cat /proc/cpuinfo|grep processor|wc -l
+cat /proc/cpuinfo|grep 'model name'|head -1
+cat /proc/meminfo|head; uname -a
+echo; df -hT; echo; sudo dmesg -T|head; echo; swapon -v; echo
+
+run() {
+	echo "::Run '$@':"
+	$@
+	echo
+}
+
+remove() {
+	echo "::Delete '$@'"
+	sudo rm -rf $@
+}
+
+_true() {
+	echo "warn $1 ; return: $?"
+	true
+}
+
+echo
+sudo du -sh /usr/share/*
+echo
+sudo du -sh /usr/share/*/*>usr.share
+tree -a /usr/share >>usr.share
+
+echo
+sudo du -sh /usr/local/*
+echo
+sudo du -sh /usr/local/*/* >usr.local
+tree -a /usr/local >>usr.local
+
+echo
+sudo du -sh /opt/hostedtoolcache/*
+sudo du -sh /opt/hostedtoolcache/*/* >opt
+tree -a /opt/hostedtoolcache >>opt
+echo
+
+
+remove /usr/share/swift
+remove /usr/share/miniconda
+remove /usr/share/dotnet
+remove /usr/local
+remove /opt/hostedtoolcache
+
+
+run which go || _true go
+run which java || _true java
+run which node || _true node
+run which python || _true python
+run which python3 || _true python3
+run dpkg -S /usr/share/swift || _true DPKG
+run dpkg -S /usr/share/miniconda || _true DPKG
+run dpkg -S /usr/share/dotnet || _true DPKG
+python3 --version
+
+
+sudo apt update >/dev/null 2>&1
+sudo apt upgrade -y >/dev/null 2>&1
+sudo apt install neofetch screenfetch -y >/dev/null 2>&1
+echo
+echo
+neofetch
+echo
+echo
+screenfetch
+
+echo
+df -Th
+echo
+df -Tha
+echo
+
+git config --global user.name 'github-actions'
+git config --global user.email 'noreply@github.com'
+git add .
+git commit -m "Action $(date -u)"
+git push origin main

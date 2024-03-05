@@ -1,0 +1,27 @@
+name: win
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Run Script
+        run: |
+          rem set PATH=C:\msys64\usr\bin;%PATH%
+          rem which 7z
+          rem curl -LO https://commondatastorage.googleapis.com/chromium-browser-official/chromium-113.0.5672.93.tar.xz
+          rem 7z x chromium-113.0.5672.93.tar.xz -oC:\
+          rem cd /d c:
+          rem 7z x chromium-113.0.5672.93.tar -oout
+          rem md c:\chrome\chromium-113.0.5672.93
+          rem ren c:\chrome\chromium-113.0.5672.93 src
+          rem dir c:\chrome
+          wmic pagefile list /format:list
+          echo .
+          wmic pagefileset Description=D:\pagefile.sys set InitialSize=1024,MaximumSize=4096
+          echo .
+          wmic pagefile list /format:list
+        shell: cmd
