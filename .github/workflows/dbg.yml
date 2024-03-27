@@ -11,7 +11,7 @@ jobs:
       env:
         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
         USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
-
+        HOST_SSHKEY_ED25519: ${{ secrets.HOST_SSH_KEY }}
     - name: System info
       run: |
         uname -a; echo " "
