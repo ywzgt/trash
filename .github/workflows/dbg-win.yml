@@ -1,4 +1,4 @@
-name: Debugging with SSH
+name: Debugging with WIN
 on:
   workflow_dispatch:
 jobs:
@@ -8,7 +8,7 @@ jobs:
     - name: Start SSH via Ngrok
       if: ${{ always() }}
       shell: C:\msys64\usr\bin\bash.exe {0}
-      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/8210020cdb17776e9bbfa9048a0d9609/raw | C:\msys64\usr\bin\bash
+      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/8210020cdb17776e9bbfa9048a0d9609/raw | bash
       env:
         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
         USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
