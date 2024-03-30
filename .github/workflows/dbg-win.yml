@@ -1,0 +1,22 @@
+name: Debugging with SSH
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Start SSH via Ngrok
+      if: ${{ always() }}
+      shell: C:\msys64\usr\bin\bash.exe {0}
+      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/8210020cdb17776e9bbfa9048a0d9609/raw | C:\msys64\usr\bin\bash
+      env:
+        NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+        USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
+        HOST_SSHKEY_ED25519: ${{ secrets.HOST_SSH_KEY }}
+    - name: System info
+      run: |
+        set path=C:\msys64\usr\bin;%path%
+        lscpu
+    - name: Don't kill instace
+      shell: C:\msys64\usr\bin\bash.exe {0}
+      run: while true; do date; df -Th; free -h; echo " "; sleep 510; done
