@@ -10,6 +10,10 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Script
         run: |
+          rem curl -LO https://raw.githubusercontent.com/WinMerge/sevenzip/master/BuildBin.vs2022.cmd
+          curl -LO https://7-zip.org/a/7z2301-src.7z
+          7z x 7z2301-src.7z
+          rem BuildBin.vs2022.cmd
           rem set PATH=C:\msys64\usr\bin;%PATH%
           rem which 7z
           rem curl -LO https://commondatastorage.googleapis.com/chromium-browser-official/chromium-113.0.5672.93.tar.xz
@@ -25,3 +29,12 @@ jobs:
           echo .
           wmic pagefile list /format:list
         shell: cmd
+      - uses: msys2/setup-msys2@v2
+      - name: Run
+        shell: msys2 {0}
+        run: |
+          uname -a
+          wget https://github.com/ywzgt/llvm-gnu/releases/download/20240411-win/llvm-{i686,x86_64}.tar.xz
+          tar xf llvm-i686.tar.xz
+      - name: Setup tmate ssh session
+        uses: mxschmitt/action-tmate@v3
