@@ -30,11 +30,14 @@ jobs:
           wmic pagefile list /format:list
         shell: cmd
       - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
       - name: Run
         shell: msys2 {0}
         run: |
           uname -a
           wget https://github.com/ywzgt/llvm-gnu/releases/download/20240411-win/llvm-{i686,x86_64}.tar.xz
-          tar xf llvm-i686.tar.xz
+          7z x llvm-i686.tar.xz
       - name: Setup tmate ssh session
         uses: mxschmitt/action-tmate@v3
