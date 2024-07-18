@@ -1,4 +1,4 @@
-name: test
+name: test release
 on:
   workflow_dispatch:
 jobs:
@@ -13,10 +13,10 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         tag_name: test
-        files: 
+        files: |
           py
           *.sh
         fail_on_unmatched_files: true
     - name: Setup tmate ssh session
-      #if: failure()
+      if: ${{ !cancelled() }}
       uses: mxschmitt/action-tmate@v3
