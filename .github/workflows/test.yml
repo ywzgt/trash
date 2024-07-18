@@ -1,0 +1,22 @@
+name: test
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: test
+        files: 
+          py
+          *.sh
+        fail_on_unmatched_files: true
+    - name: Setup tmate ssh session
+      #if: failure()
+      uses: mxschmitt/action-tmate@v3
