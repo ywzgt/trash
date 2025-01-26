@@ -20,6 +20,6 @@ jobs:
         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
         USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
     - name: Gh login
-      run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token; gh auth setup-git; gh auth status || true
+      run: (echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token; gh auth setup-git; gh auth status) || true
     - name: Don't kill instace
       run: while true; do date; df -Th; echo " "; sleep 500; head /dev/urandom > log; done
