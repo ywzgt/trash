@@ -1,18 +1,25 @@
-name: Debugging with CI
+name: Debugging with CI (Win)
 on:
   workflow_dispatch:
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  ci:
+    runs-on: windows-latest
     permissions: write-all
+    defaults:
+      run:
+        shell: msys2 {0}
     steps:
+    - uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: unzip
     - name: Start SSH via Ngrok
       if: ${{ always() }}
-      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/8210020cdb17776e9bbfa9048a0d9609/raw | bash
+      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/846376864e53a46bd610ae45d53e56a0/raw | bash
       env:
         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
         USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
     - name: Gh login
       run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token; gh auth setup-git; gh auth status
     - name: Don't kill instace
-      run: while true; do date; df -Th; free -h; echo " "; sleep 500; head /dev/urandom > "$(cat /proc/sys/kernel/random/uuid).log"; done
+      run: while true; do date; df -Th; echo " "; sleep 500; head /dev/urandom > log; done
