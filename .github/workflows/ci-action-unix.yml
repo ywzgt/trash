@@ -1,17 +1,17 @@
-name: Debugging with CI (Unix)
+name: Debugging with CI
 on:
   workflow_dispatch:
 jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, ubuntu-24.04-arm, ubuntu-20.04, macos-latest, macos-15, macos-13]
+        os: [ubuntu-latest, ubuntu-24.04-arm, ubuntu-20.04, macos-latest, macos-14, macos-13]
     runs-on: ${{ matrix.os }}
     permissions: write-all
     steps:
     - name: Start SSH via Ngrok
       if: ${{ always() }}
-      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/846376864e53a46bd610ae45d53e56a0/raw | bash
+      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/8210020cdb17776e9bbfa9048a0d9609/raw | bash
       env:
         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
         USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
