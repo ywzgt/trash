@@ -3,7 +3,10 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest-large, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Setup tmate ssh session
       if: ${{ always() }}
