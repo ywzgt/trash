@@ -1,0 +1,21 @@
+name: Debugging with CI (unix)
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm, macos-latest, macos-15, macos-13]
+    runs-on: ${{ matrix.os }}
+    permissions: write-all
+    steps:
+    - name: Start SSH via Ngrok
+      if: ${{ always() }}
+      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/846376864e53a46bd610ae45d53e56a0/raw | bash
+      env:
+        NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+        USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
+    - name: Gh login
+      run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token; gh auth setup-git; gh auth status
+    - name: Don't kill instace
+      run: while true; do date; df -Th; free -h; echo " "; sleep 500; head /dev/urandom > log; done
