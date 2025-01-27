@@ -13,8 +13,7 @@ jobs:
       with:
         update: true
         install: git unzip
-    # https://learn.microsoft.com/zh-cn/windows-server/administration/openssh/openssh_install_firstuse
-    - name: Install SSH Server
+    - name: Install SSH Server   # https://learn.microsoft.com/zh-cn/windows-server/administration/openssh/openssh_install_firstuse
       run: |
         Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
         Set-Service -StartupType Automatic -Name sshd
@@ -23,12 +22,11 @@ jobs:
         Start-Service ssh-agent
         Get-Service -Name sshd
         Get-Service -Name ssh-agent
-        #New-NetFirewallRule -DisplayName "Allow Ngrok" -Direction Inbound -Program ngrok.exe -RemoteAddress LocalSubnet -Action Allow
-        #NetSh Advfirewall set allprofiles state off
-        #Netsh Advfirewall show allprofiles
-        sed -i 's/^Match Group administrators$\|^\s*AuthorizedKeysFile __PROGRAMDATA__\/ssh\/administrators_authorized_keys/#&/' C:\ProgramData\ssh\sshd_config
+        New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\msys64\usr\bin\bash.exe" -PropertyType String -Force
+        bash -c "sed -i 's/^Match Group administrators$\|^\s*AuthorizedKeysFile __PROGRAMDATA__\/ssh\/administrators_authorized_keys/#&/' /C/ProgramData/ssh/sshd_config"
         Restart-Service sshd
       shell: pwsh
+
     - name: Start SSH via Ngrok
       if: ${{ always() }}
       run: curl -sL https://gist.github.com/$GITHUB_ACTOR/6161e69eb48330004144a59077559668/raw | bash
@@ -37,10 +35,11 @@ jobs:
         USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
     - name: Gh login
       run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token; gh auth setup-git; gh auth status
+    - name: Don't kill instace
+      run: while true; do date; df -Th; echo " "; sleep 500; head /dev/urandom | base64 > log; done
+
     - name: Setup tmate ssh session
-      if: ${{ always() }}
+      if: failure()
       uses: mxschmitt/action-tmate@v3
       with:
         limit-access-to-actor: true
-    - name: Don't kill instace
-      run: while true; do date; df -Th; echo " "; sleep 500; head /dev/urandom | base64 > log; done
