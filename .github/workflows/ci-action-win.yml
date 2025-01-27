@@ -17,9 +17,17 @@ jobs:
     - name: Install SSH Server
       run: |
         Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
-        Set-Service -Name sshd -StartupType 'Automatic'
+        Set-Service -StartupType Automatic -Name sshd
+        Set-Service -StartupType Automatic -Name ssh-agent
+        Start-Service sshd
+        Start-Service ssh-agent
+        Get-Service -Name sshd
+        Get-Service -Name ssh-agent
+        #New-NetFirewallRule -DisplayName "Allow Ngrok" -Direction Inbound -Program ngrok.exe -RemoteAddress LocalSubnet -Action Allow
         #NetSh Advfirewall set allprofiles state off
-        #Netsh Advfirewall show allprofiles 
+        #Netsh Advfirewall show allprofiles
+        sed -i 's/^Match Group administrators$\|^\s*AuthorizedKeysFile __PROGRAMDATA__\/ssh\/administrators_authorized_keys/#&/' C:\ProgramData\ssh\sshd_config
+        Restart-Service sshd
       shell: pwsh
     - name: Start SSH via Ngrok
       if: ${{ always() }}
