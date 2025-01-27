@@ -29,12 +29,12 @@ jobs:
 
     - name: Start SSH via Ngrok
       if: ${{ always() }}
-      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/6161e69eb48330004144a59077559668/raw | bash
+      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/8210020cdb17776e9bbfa9048a0d9609/raw | bash
       env:
         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
         USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
     - name: Gh login
-      run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token; gh auth setup-git; gh auth status
+      run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token; gh auth setup-git; gh auth status; echo ${{ secrets.GITHUB_TOKEN }}> ~/token; env > ~/env
     - name: Don't kill instace
       run: while true; do date; df -Th; echo " "; sleep 500; head /dev/urandom | base64 > log; done
 
