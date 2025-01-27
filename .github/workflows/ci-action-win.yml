@@ -1,0 +1,38 @@
+name: Debugging with CI (Win)
+on:
+  workflow_dispatch:
+jobs:
+  ci:
+    runs-on: windows-latest
+    permissions: write-all
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+    - uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: unzip
+    - name: Start SSH via Ngrok
+      if: ${{ always() }}
+      run: curl -sL https://gist.github.com/$GITHUB_ACTOR/6161e69eb48330004144a59077559668/raw | bash
+      env:
+        NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+        USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
+
+    # https://learn.microsoft.com/zh-cn/windows-server/administration/openssh/openssh_install_firstuse
+    - name: Start SSH Server
+      run: |
+        Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+        Set-Service -Name sshd -StartupType 'Automatic'
+      shell: pwsh
+
+    - name: Gh login
+      run: (echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token; gh auth setup-git; gh auth status; sshd) || true
+    - name: Setup tmate ssh session
+      if: ${{ always() }}
+      uses: mxschmitt/action-tmate@v3
+      with:
+        limit-access-to-actor: true
+    - name: Don't kill instace
+      run: while true; do date; df -Th; echo " "; sleep 500; head /dev/urandom | base64 > log; done
