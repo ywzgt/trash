@@ -18,8 +18,8 @@ jobs:
       run: |
         Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
         Set-Service -Name sshd -StartupType 'Automatic'
-        NetSh Advfirewall set allprofiles state off
-        Netsh Advfirewall show allprofiles 
+        #NetSh Advfirewall set allprofiles state off
+        #Netsh Advfirewall show allprofiles 
       shell: pwsh
     - name: Start SSH via Ngrok
       if: ${{ always() }}
@@ -29,5 +29,10 @@ jobs:
         USER_SSH_KEY: ${{ secrets.USER_SSH_KEY }}
     - name: Gh login
       run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token; gh auth setup-git; gh auth status
+    - name: Setup tmate ssh session
+      if: ${{ always() }}
+      uses: mxschmitt/action-tmate@v3
+      with:
+        limit-access-to-actor: true
     - name: Don't kill instace
       run: while true; do date; df -Th; echo " "; sleep 500; head /dev/urandom | base64 > log; done
