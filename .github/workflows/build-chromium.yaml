@@ -1,0 +1,49 @@
+name: Build chromium
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest ]
+        arch: [ x86, x64, arm, arm64 ]
+        target_os: [ android, linux, win ]
+        include:
+          - arch: x64
+            os: macos-13
+            target_os: mac
+        exclude:
+          - arch: arm
+            target_os: win
+    runs-on: ${{ matrix.os }}
+    permissions: write-all
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.ref }}
+    - uses: actions/upload-artifact@v4
+      with:
+        name: mingw-ucrt-${{ matrix.arch }}
+        path: llvm-mingw-rt-*.tar.xz
+        retention-days: 3
+    - name: Download artifact ${{ matrix.arch }}
+      uses: actions/download-artifact@v4
+      with:
+        name: mingw-ucrt-${{ matrix.arch }}
+      continue-on-error: true
+
+    - name: Upload to Releases
+      if: env.TAG_VERSION
+      uses: softprops/action-gh-release@master
+      with:
+        tag_name: ${{ env.TAG_VERSION }}
+        body: monochrome ${{ env.TAG_VERSION }}
+        files: apk/*
+        fail_on_unmatched_files: true
+        prerelease: false
+    - name: Setup tmate ssh session
+      if: failure() && github.event_name == 'workflow_dispatch'
+      uses: mxschmitt/action-tmate@v3
+  - run: uname -a; dmesg -T
