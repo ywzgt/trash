@@ -46,4 +46,4 @@ jobs:
     - name: Setup tmate ssh session
       if: failure() && github.event_name == 'workflow_dispatch'
       uses: mxschmitt/action-tmate@v3
-  - run: uname -a; dmesg -T
+    - run: uname -a; dmesg -T
