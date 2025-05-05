@@ -10,7 +10,7 @@ jobs:
         arch: [ x86, x64, arm, arm64 ]
         target: [ android, android_cromite, android_cromite_gms, linux, win ]
         exclude:
-          - arch: arm
+          - arch: arm, arm64
             target: win
         include:
           - os: windows-latest
@@ -45,4 +45,4 @@ jobs:
     - name: Setup tmate ssh session
       if: failure() && github.event_name == 'workflow_dispatch'
       uses: mxschmitt/action-tmate@v3
-    - run: uname -a; dmesg -T
+    - run: uname -a; sudo dmesg -T
