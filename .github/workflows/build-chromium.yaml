@@ -8,14 +8,17 @@ jobs:
       matrix:
         os: [ubuntu-latest ]
         arch: [ x86, x64, arm, arm64 ]
-        target_os: [ android, linux, windows ]
-        include:
-          - os: macos-13
-            arch: x64
-            target_os: mac
+        target: [ android, android_cromite, android_cromite_gms, linux, win ]
         exclude:
           - arch: arm
-            target_os: windows
+            target: win
+        include:
+          - os: windows-latest
+            arch: arm64
+            target: win
+          - os: macos-13
+            arch: x64
+            target: mac
     runs-on: ${{ matrix.os }}
     permissions: write-all
     steps:
