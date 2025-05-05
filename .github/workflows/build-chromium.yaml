@@ -10,7 +10,9 @@ jobs:
         arch: [ x86, x64, arm, arm64 ]
         target: [ android, android_cromite, android_cromite_gms, linux, win ]
         exclude:
-          - arch: arm, arm64
+          - arch: arm
+            target: win
+          - arch: arm64
             target: win
         include:
           - os: windows-latest
