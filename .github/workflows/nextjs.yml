@@ -16,7 +16,7 @@ jobs:
           echo "command=install" >> $GITHUB_OUTPUT
           echo "command=update" > $GITHUB_OUTPUT
       - name: Setup Node
-        if: steps.detect.outputs.command == 'install'
+        if: steps.detect.outputs.command == 'install' && ${{ !cancelled() }}
         uses: actions/setup-node@v4
         with:
           node-version: "20"
