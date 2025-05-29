@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Detect package manager
+        id: detect
+        run: |
+          echo "command=install" >> $GITHUB_OUTPUT
+          echo "command=update" >> $GITHUB_OUTPUT
+      - name: Setup Node
+        if: steps.detect.outputs.command == 'install' && ${{ !cancelled() }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
+      - name: Setup Pages
+        if: steps.detect.outputs.command == 'update' && ${{ !cancelled() }}
+        run: ls -la
