@@ -13,13 +13,13 @@ jobs:
       - name: Detect package manager
         id: detect
         run: |
-          echo "cmd=run0" >> $GITHUB_OUTPUT
+          echo "cmd=run" >> $GITHUB_OUTPUT
           echo "command=install" >> $GITHUB_OUTPUT
           echo "command=update" >> $GITHUB_OUTPUT
           exit 1
       - name: Setup Node
         if: steps.detect.outputs.cmd == 'run' && !cancelled()
-        run: echo ${{ steps.detect.outputs.command }}; exit 2
+        run: echo ${{ steps.detect.outputs.command }}
       - name: Setup Pages
         if: steps.detect.outputs.command == 'update'
         run: ls -la; echo ${{ steps.detect.outputs.command }}
