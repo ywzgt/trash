@@ -22,5 +22,5 @@ jobs:
         continue-on-error: true
         run: echo ${{ steps.detect.outputs.command }}
       - name: Setup Pages
-        if: steps.detect.outputs.command == 'update' || ${{ failure() }}
+        if: steps.detect.outputs.command == 'update'
         run: ls -la; echo ${{ steps.detect.outputs.command }}
