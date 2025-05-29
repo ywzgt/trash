@@ -16,6 +16,7 @@ jobs:
           echo "cmd=run0" >> $GITHUB_OUTPUT
           echo "command=install" >> $GITHUB_OUTPUT
           #echo "command=update" >> $GITHUB_OUTPUT
+          exit 1
       - name: Setup Node
         if: steps.detect.outputs.command == 'install' && ${{ failure() }}
         run: echo ${{ steps.detect.outputs.command }}
