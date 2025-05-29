@@ -13,7 +13,7 @@ jobs:
       - name: Detect package manager
         id: detect
         run: |
-          echo "cmd=run" >> $GITHUB_OUTPUT
+          echo "cmd=run0" >> $GITHUB_OUTPUT
           echo "command=install" >> $GITHUB_OUTPUT
           echo "command=update" >> $GITHUB_OUTPUT
           exit 1
