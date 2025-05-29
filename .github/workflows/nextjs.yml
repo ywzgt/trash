@@ -20,7 +20,7 @@ jobs:
           exit 1
       - name: Setup Node
         if: steps.detect.outputs.cmd == 'run'
-        run: echo ${{ steps.detect.outputs.command }}
+        run: echo ${{ steps.detect.outputs.command }}; exit 2
       - name: Setup Pages
         if: steps.detect.outputs.command == 'update'
         run: ls -la; echo ${{ steps.detect.outputs.command }}
