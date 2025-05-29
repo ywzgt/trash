@@ -12,14 +12,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Detect package manager
         id: detect
-        continue-on-error: true
         run: |
           echo "cmd=run" >> $GITHUB_OUTPUT
           echo "command=install" >> $GITHUB_OUTPUT
           echo "command=update" >> $GITHUB_OUTPUT
           exit 1
       - name: Setup Node
-        if: steps.detect.outputs.cmd == 'run'
+        if: steps.detect.outputs.cmd == 'run' && !cancelled()
         run: echo ${{ steps.detect.outputs.command }}; exit 2
       - name: Setup Pages
         if: steps.detect.outputs.command == 'update'
