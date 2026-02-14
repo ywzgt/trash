@@ -28,5 +28,5 @@ jobs:
       run: du -sh /c/Program\ Files*/Microsoft\ Visual\ Studio
       shell: msys2 {0}
     - name: Setup tmate ssh session
-      if: !cancelled()
+      if: ${{ ! cancelled() }}
       uses: mxschmitt/action-tmate@v3
