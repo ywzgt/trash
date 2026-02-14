@@ -14,6 +14,7 @@ jobs:
         update: true
         install: git p7zip unzip
     - name: Modify Visual Studio
+      shell: powershell
       run: |
         $vsPath = (& "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -property installationPath).Trim()
         $args = "modify --installPath `"$vsPath`" --quiet --norestart --add Microsoft.VisualStudio.Component.VC.ATLMFC --add Microsoft.VisualStudio.Component.VC.MFC.ARM64 --add Microsoft.VisualStudio.Component.VC.Tools.ARM64 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Workload.NativeDesktop"
