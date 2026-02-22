@@ -5,13 +5,13 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest, macos-14, macos-13, ubuntu-24.04-arm]
+        os: [ubuntu-latest, windows-latest, macos-latest, macos-15-intel, ubuntu-22.04, ubuntu-24.04-arm]
     runs-on: ${{ matrix.os }}
     steps:
     - name: Gh login
       run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token; gh auth setup-git; gh auth status
     - name: Setup tmate ssh session
-      if: ${{ always() }}
+      if: ${{ !cancelled() }}
       uses: mxschmitt/action-tmate@v3
       with:
         limit-access-to-actor: true
